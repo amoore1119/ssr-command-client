@@ -19,8 +19,10 @@ class ParseShadowsocksr(object):
     该工具类可提供静态方法进行shadowsocksr订阅链接解析
 
     属性:
-        None
+        SSR_SCHEMA ssr协议连接字符串
     """
+
+    SSR_SCHEMA = "ssr://"
 
     def __init__(self):
         pass
@@ -48,7 +50,7 @@ class ParseShadowsocksr(object):
         :param ssr_url: ssr链接，例如"ssr://rexx"
         :return: ssr_dict: 返回ssr信息字典
         """
-        ssr_available_url = ssr_url[6:]
+        ssr_available_url = ssr_url[len(ParseShadowsocksr.SSR_SCHEMA):]
         try:
             ssr_decode_url = ParseShadowsocksr.base64_decode(ssr_available_url)
         except Exception as e:
@@ -129,3 +131,59 @@ class ParseShadowsocksr(object):
                     if ssr_dict:
                         ssr_dict_list.append(ssr_dict)
         return ssr_dict_list
+
+
+class ParseV2ray(object):
+    """
+
+    """
+
+    V2RAY_SCHEMA = "vmess://"
+
+    dns = {
+        "servers": [
+            "8.8.8.8",
+            "8.8.4.4"
+        ]
+    }
+
+    inbounds = [
+        {
+            "tag": "socks",
+            "port": 1080,
+            "listen": "127.0.0.1",
+            "protocol": "socks",
+            "sniffing": {
+                "enabled": True,
+                "destOverride": [
+                    "http",
+                    "tls"
+                ]
+            },
+            "settings": {
+                "auth": "noauth",
+                "udp": True,
+                "allowTransparent": False
+            }
+        },
+        {
+            "tag": "http",
+            "port": 1081,
+            "listen": "127.0.0.1",
+            "protocol": "http",
+            "sniffing": {
+                "enabled": True,
+                "destOverride": [
+                    "http",
+                    "tls"
+                ]
+            },
+            "settings": {
+                "udp": False,
+                "allowTransparent": False
+            }
+        }
+    ]
+
+    def __init__(self):
+        pass
