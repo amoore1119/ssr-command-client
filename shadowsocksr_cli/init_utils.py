@@ -84,7 +84,7 @@ class InitConfig(object):
         else:
             return False
 
-    def __initConfigFile(self):
+    def __init_config_file(self):
         config = configparser.ConfigParser()
         config.add_section('default')
         config.set('default', 'subscribe_url', self.subscribe_url)
@@ -104,4 +104,4 @@ class InitConfig(object):
         os.mkdir(self.config_dir)
         with open(self.config_file, 'w') as file:
             file.write('')
-        self.__initConfigFile()
+        self.__init_config_file()
