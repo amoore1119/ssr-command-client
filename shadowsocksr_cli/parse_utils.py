@@ -7,7 +7,6 @@
 @desc: 提供解析Shadowsocksr节点工具类
 """
 
-import re
 import base64
 import requests
 from shadowsocksr_cli.logger import *
@@ -131,59 +130,3 @@ class ParseShadowsocksr(object):
                     if ssr_dict:
                         ssr_dict_list.append(ssr_dict)
         return ssr_dict_list
-
-
-class ParseV2ray(object):
-    """
-
-    """
-
-    V2RAY_SCHEMA = "vmess://"
-
-    dns = {
-        "servers": [
-            "8.8.8.8",
-            "8.8.4.4"
-        ]
-    }
-
-    inbounds = [
-        {
-            "tag": "socks",
-            "port": 1080,
-            "listen": "127.0.0.1",
-            "protocol": "socks",
-            "sniffing": {
-                "enabled": True,
-                "destOverride": [
-                    "http",
-                    "tls"
-                ]
-            },
-            "settings": {
-                "auth": "noauth",
-                "udp": True,
-                "allowTransparent": False
-            }
-        },
-        {
-            "tag": "http",
-            "port": 1081,
-            "listen": "127.0.0.1",
-            "protocol": "http",
-            "sniffing": {
-                "enabled": True,
-                "destOverride": [
-                    "http",
-                    "tls"
-                ]
-            },
-            "settings": {
-                "udp": False,
-                "allowTransparent": False
-            }
-        }
-    ]
-
-    def __init__(self):
-        pass
