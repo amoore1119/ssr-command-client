@@ -529,7 +529,7 @@ def vmess2client(_t, _v):
 
 def parse(v2ray_link):
     line = parse_link(v2ray_link)
-    return vmess2client(load_TPL("CLIENT"), line)
+    return json.dumps(vmess2client(load_TPL("CLIENT"), line))
 
 
 if __name__ == "__main__":
